@@ -86,7 +86,7 @@ body {
     border-bottom: 2px solid var(--colour-lightbg);
     margin-right: .5em;
     margin-top: .7em;
-    transition: ease-in-out .2s;
+    transition: cubic-bezier(1, -0.73, 0.26, 5.38) .5s;
 }
 
 .btn:hover {
