@@ -100,7 +100,7 @@ li i {
 footer {
     position: fixed;
     bottom: 0;
-    left: 40%;
+    left: 0;
 }
 
 @media (max-width: 1083px) {
