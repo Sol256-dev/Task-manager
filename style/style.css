@@ -74,7 +74,9 @@ body {
     font-size: 3em;
     border-bottom: 2px solid var(--colour-lightbg);
     background: none;
-    border-top: none;  border-left: none;  border-right: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     outline-style: none;
     color: ghostwhite;
     font-size: .6em;
@@ -83,11 +85,15 @@ body {
     min-width: 40%;
 }
 
-.btn:hover  {
+.btn:hover {
     /* background-color: var(--colour-accent); */
     color: var(--colour-lightbg);
     border-top: 5px solid var(--colour-lightbg);
     cursor: pointer;
+}
+
+.btn:focus {
+    border-top: 5px solid var(--colour-accent);
 }
 
 .btn {
@@ -95,6 +101,11 @@ body {
     margin-right: .5em;
     margin-top: .7em;
     transition: cubic-bezier(1, -0.73, 0.26, 5.38) .5s;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    background: none;
+    color: ghostwhite;
 }
 
 .sec1 input::placeholder {
@@ -106,9 +117,8 @@ body {
     text-align: center;
 }
 
-li {
-    border-bottom: 2px solid var(--colour-darkbg);
-    margin-bottom: .5em;
+.temp-msg.hide {
+    display: none;
 }
 
 li i {
@@ -124,14 +134,23 @@ li i {
     align-content: center;
 } */
 
+li .show {
+    display: block;
+}
+
+.no-task .hide {
+    display: none;
+}
+
 @media (max-width: 1083px) {
     body {
         font-size: 20px;
     }
+
     .container2 {
         display: flex;
         flex-direction: column;
-        padding: 1em 0em ;
+        padding: 1em 0em;
     }
 
     .sec1 input {
