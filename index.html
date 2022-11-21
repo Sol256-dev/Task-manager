@@ -11,7 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-    <script src="/js/script.js"></script>
+    <script src="/js/script.js" defer></script>
     <title>Task-manager</title>
 </head>
 
@@ -29,14 +29,14 @@
                 Type your task below: 
                 <div class="form">
                     <input type="text" placeholder="Right here mate!" class="add-task">
-                    <div class="btn">Add</div>
+                    <button class="btn" type="submit">Add</button>
                 </div>
             </section>
             <section class="sec">
-                <h2>Title here</h2>
+                <h2 id="task-title">Task List</h2>
                 <div class="task-area">
                     <ul>
-                        <li class="task-item">No Tasks</li>
+                        <div class="temp-msg">No tasks!</div>
                     </ul>
                 </div>
             </section>
