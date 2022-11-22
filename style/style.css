@@ -33,6 +33,7 @@ body {
     color: ghostwhite;
     border-radius: 10px;
     padding: 0em 1em;
+    height: auto;
 }
 
 .fa-list-check:before, .fa-tasks:before {
@@ -45,6 +46,7 @@ body {
     color: black;
     border-radius: 10px;
     padding: .5em 1em;
+    height: auto;
 }
 
 .form {
@@ -106,6 +108,8 @@ body {
     border-left: none;
     background: none;
     color: ghostwhite;
+    font-weight: 800;
+    font-size: .8em;
 }
 
 .sec1 input::placeholder {
