@@ -147,6 +147,12 @@ li .show {
     display: none;
 }
 
+.bottom-btn {
+    display: flex;
+    gap: 4em;
+    justify-content: center;
+}
+
 @media (max-width: 1083px) {
     body {
         font-size: 20px;
