@@ -4,6 +4,8 @@
     --colour-text: ;
     --colour-darkbg: #16425B;
     --colour-lightbg: #FAF0CA;
+    --colour-delete: red;
+    --colour-edit: green;
 }
 
 body {
@@ -17,10 +19,6 @@ body {
 .container1 {
     height: 100%;
 }
-
-/* * {
-    border: 1px solid red;
-} */
 
 .container2 {
     margin: 2em;
@@ -63,12 +61,7 @@ body {
     width: 20%;
 }
 
-/* .sec1 {
-    margin-left: 1em;
-} */
-
 .sec1 input {
-    /* position: absolute; */
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -83,13 +76,11 @@ body {
     outline-style: none;
     color: ghostwhite;
     font-size: .6em;
-    /* border-radius: 10px; */
     margin-top: .8em;
     min-width: 40%;
 }
 
 .btn:hover {
-    /* background-color: var(--colour-accent); */
     color: var(--colour-lightbg);
     border-top: 5px solid var(--colour-lightbg);
     cursor: pointer;
@@ -128,16 +119,7 @@ body {
 
 li i {
     font-size: .8em;
-    /* position: relative;
-    float: right; */
 }
-
-/* footer {
-    margin-left: 1em;
-    position: fixed;
-    bottom: 0;
-    align-content: center;
-} */
 
 li .show {
     display: block;
@@ -145,6 +127,36 @@ li .show {
 
 .no-task .hide {
     display: none;
+}
+
+.item-style {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-edit-del {
+    display: flex;
+    gap: 1em;
+}
+
+.item-style .edit-icon {
+    color: var(--colour-darkbg);
+    transition: cubic-bezier(1, -0.73, 0.26, 5.38) .2s;
+}
+
+.item-style .edit-icon:hover {
+    color:var(--colour-edit);
+    font-size: 1.1em;
+}
+
+.item-style .del-icon {
+    color: var(--colour-darkbg);
+    transition: cubic-bezier(1, -0.73, 0.26, 5.38) .2s;
+}
+
+.item-style .del-icon:hover {
+    color:var(--colour-delete);
+    font-size: 1.1em;
 }
 
 .bottom-btn {
@@ -166,7 +178,6 @@ li .show {
 
     .sec1 input {
         padding: .7em;
-        /* margin: .4em; */
     }
 
     .sec {

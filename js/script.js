@@ -14,7 +14,7 @@ let captureInputValues = () => {
 let storeArrInLocalstorage = () => {
   let arrStr = JSON.stringify(arr);
   window.localStorage.setItem("keyValue", arrStr);
-  //   call displayToList fx
+  // call displayToList fx
   displayToList();
 };
 
@@ -23,6 +23,10 @@ let displayToList = () => {
   // UI elements
   const ul = document.querySelector("ul"),
     li = document.createElement("li"),
+    delIcon = document.createElement("i"),
+    editIcon = document.createElement("i"),
+    div = document.createElement("div"),
+    div2 = document.createElement("div"),
     tempMsg = document.querySelector(".temp-msg");
 
   if (tempMsg.classList.contains("hide") && inputField.value === "") {
@@ -36,7 +40,15 @@ let displayToList = () => {
       if (element === inputField.value) {
         const txtNode = document.createTextNode(element);
         li.appendChild(txtNode);
-        ul.appendChild(li);
+        div.classList.add("item-style")
+        div.appendChild(li);
+        div2.append(editIcon);
+        div2.append(delIcon);
+        div.append(div2)
+        div2.classList.add("list-edit-del")
+        editIcon.classList.add("fa","fa-pencil-square","edit-icon");
+        delIcon.classList.add("fa","fa-trash","del-icon");
+        ul.appendChild(div);
         clearInputField();
       }
     });
