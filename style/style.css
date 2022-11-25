@@ -117,6 +117,13 @@ body {
     display: none;
 }
 
+ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    margin: 0em;
+    padding: .5em;
+}
+
 li i {
     font-size: .8em;
 }
