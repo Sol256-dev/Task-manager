@@ -1,3 +1,36 @@
+// keep the page up-to-date with content from the database after refresh
+let body = document.querySelector("body");
+tempMsg = document.querySelector(".temp-msg");
+window.onload = () => {
+  if (localStorage.length !== 0) {
+    tempMsg.classList.add("hide");
+    let arrStorage = JSON.parse(localStorage.getItem("keyValue"));
+    arrStorage.forEach((element) => {
+      const ul = document.querySelector("ul"),
+        li = document.createElement("li"),
+        delIcon = document.createElement("i"),
+        editIcon = document.createElement("i"),
+        div = document.createElement("div"),
+        div2 = document.createElement("div");
+
+      const txtNode = document.createTextNode(element);
+      li.appendChild(txtNode);
+      div.classList.add("item-style");
+      div.appendChild(li);
+      div2.append(editIcon);
+      div2.append(delIcon);
+      div.append(div2);
+      div2.classList.add("list-edit-del");
+      editIcon.classList.add("fa", "fa-pencil-square", "edit-icon");
+      delIcon.classList.add("fa", "fa-trash", "del-icon");
+      ul.appendChild(div);
+      clearInputField();
+    });
+  } else {
+    console.log("local storage is empty");
+  }
+};
+
 // array to store input values
 let arr = [];
 
@@ -40,14 +73,14 @@ let displayToList = () => {
       if (element === inputField.value) {
         const txtNode = document.createTextNode(element);
         li.appendChild(txtNode);
-        div.classList.add("item-style")
+        div.classList.add("item-style");
         div.appendChild(li);
         div2.append(editIcon);
         div2.append(delIcon);
-        div.append(div2)
-        div2.classList.add("list-edit-del")
-        editIcon.classList.add("fa","fa-pencil-square","edit-icon");
-        delIcon.classList.add("fa","fa-trash","del-icon");
+        div.append(div2);
+        div2.classList.add("list-edit-del");
+        editIcon.classList.add("fa", "fa-pencil-square", "edit-icon");
+        delIcon.classList.add("fa", "fa-trash", "del-icon");
         ul.appendChild(div);
         clearInputField();
       }
