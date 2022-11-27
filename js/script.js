@@ -97,3 +97,10 @@ let clearInputField = () => {
 const addBtn = document.querySelector(".btn").addEventListener("click", () => {
   captureInputValues();
 });
+
+let clearBtn = document
+  .querySelector(".btn-clear")
+  .addEventListener("click", () => {
+    localStorage.removeItem("keyValue");
+    window.location.reload();
+  });
