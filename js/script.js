@@ -54,7 +54,7 @@ let storeArrInLocalstorage = () => {
 // fx to pick items from localStorage and display on a list
 let displayToList = () => {
   // UI elements
-  const ul = document.querySelector("ul"),
+  let ul = document.querySelector("ul"),
     li = document.createElement("li"),
     delIcon = document.createElement("i"),
     editIcon = document.createElement("i"),
@@ -86,6 +86,23 @@ let displayToList = () => {
       }
     });
   }
+
+  // task edit button
+  let editBtn = document.querySelector(".edit-icon");
+  editBtn.addEventListener("click", () => {
+    console.log("edit button clicked");
+  });
+
+  // Task delete button
+  let delBtn = document.querySelector(".del-icon");
+  delBtn.addEventListener("click", () => {
+    // console.log("delete task button clicked");
+    let tempStore = JSON.parse(localStorage.getItem("keyValue"));
+    // use foreach loop to iterate through the tempStore array
+    tempStore.forEach((element) => {
+      console.log(element);
+    });
+  });
 };
 
 // clear input field
@@ -98,6 +115,7 @@ const addBtn = document.querySelector(".btn").addEventListener("click", () => {
   captureInputValues();
 });
 
+// Clear all content from the local storage database
 let clearBtn = document
   .querySelector(".btn-clear")
   .addEventListener("click", () => {

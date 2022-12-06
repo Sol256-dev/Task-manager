@@ -14,4 +14,4 @@ Project Breakdown / Required Features
 7. Use font-awesome to add icons to the app such as; the delete, edit, and add
    task icons
 8. Make use of google fonts for the application’s font-family
-9. Host your project on Netlify
+9. Host your project on Netlify 
