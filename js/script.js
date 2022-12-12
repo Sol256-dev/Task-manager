@@ -1,20 +1,19 @@
-// keep the page up-to-date with content from the database after refresh
-let body = document.querySelector("body");
-tempMsg = document.querySelector(".temp-msg");
+let ul = document.querySelector("ul");
+
+// check localStorage for tasks in database
 window.onload = () => {
   if (localStorage.length !== 0) {
-    tempMsg.classList.add("hide");
-    let arrStorage = JSON.parse(localStorage.getItem("keyValue"));
-    arrStorage.forEach((element) => {
-      const ul = document.querySelector("ul"),
-        li = document.createElement("li"),
+    for (let i = 1; i <= localStorage.length; i++) {
+      let temporaryStore = JSON.parse(localStorage.getItem(`task ${i}`));
+      let textNode = document.createTextNode(temporaryStore.task);
+      let li = document.createElement("li"),
         delIcon = document.createElement("i"),
         editIcon = document.createElement("i"),
         div = document.createElement("div"),
-        div2 = document.createElement("div");
-
-      const txtNode = document.createTextNode(element);
-      li.appendChild(txtNode);
+        div2 = document.createElement("div"),
+        tempMsg = document.querySelector(".temp-msg");
+      tempMsg.classList.add("hide");
+      li.appendChild(textNode);
       div.classList.add("item-style");
       div.appendChild(li);
       div2.append(editIcon);
@@ -25,14 +24,40 @@ window.onload = () => {
       delIcon.classList.add("fa", "fa-trash", "del-icon");
       ul.appendChild(div);
       clearInputField();
-    });
+
+      // task delete button
+      delIcon.addEventListener("click", () => {
+        localStorage.removeItem(`task ${i}`);
+        location.reload();
+      });
+
+      // task edit button
+      editIcon.addEventListener("click", () => {
+        temporaryStore.task = inputField.value;
+      });
+
+      // check task as done
+      li.addEventListener("click", () => {
+        defaultTaskState = true;
+        let temporaryStore2 = JSON.parse(localStorage.getItem(`task ${i}`));
+        if (temporaryStore2.state === true) {
+          li.classList.add("done");
+        }
+        let valueDictionary2 = {
+          state: defaultTaskState,
+          task: temporaryStore.task,
+        };
+        localStorage.setItem(`task ${i}`, JSON.stringify(valueDictionary2));
+      });
+    }
   } else {
-    console.log("local storage is empty");
+    console.log("localStorage empty");
   }
 };
 
 // array to store input values
 let arr = [];
+let defaultTaskState = false;
 
 let inputField = document.querySelector(".add-task");
 
@@ -45,8 +70,10 @@ let captureInputValues = () => {
 
 // fx to store arr in localStorage
 let storeArrInLocalstorage = () => {
-  let arrStr = JSON.stringify(arr);
-  window.localStorage.setItem("keyValue", arrStr);
+  for (let i = 0; i < arr.length; i++) {
+    let valueDictionary = { state: defaultTaskState, task: arr[i] };
+    localStorage.setItem(`task ${i + 1}`, JSON.stringify(valueDictionary));
+  }
   // call displayToList fx
   displayToList();
 };
@@ -54,55 +81,56 @@ let storeArrInLocalstorage = () => {
 // fx to pick items from localStorage and display on a list
 let displayToList = () => {
   // UI elements
-  let ul = document.querySelector("ul"),
-    li = document.createElement("li"),
+  let li = document.createElement("li"),
     delIcon = document.createElement("i"),
     editIcon = document.createElement("i"),
     div = document.createElement("div"),
     div2 = document.createElement("div"),
     tempMsg = document.querySelector(".temp-msg");
 
-  if (tempMsg.classList.contains("hide") && inputField.value === "") {
-    alert("Please enter a task!");
-  } else {
-    // tempStore stores an array of the localStorage values
-    let tempStore = JSON.parse(localStorage.getItem("keyValue"));
-    tempMsg.classList.add("hide");
-    // use foreach loop to iterate through the tempStore array
-    tempStore.forEach((element) => {
-      if (element === inputField.value) {
-        const txtNode = document.createTextNode(element);
-        li.appendChild(txtNode);
-        div.classList.add("item-style");
-        div.appendChild(li);
-        div2.append(editIcon);
-        div2.append(delIcon);
-        div.append(div2);
-        div2.classList.add("list-edit-del");
-        editIcon.classList.add("fa", "fa-pencil-square", "edit-icon");
-        delIcon.classList.add("fa", "fa-trash", "del-icon");
-        ul.appendChild(div);
-        clearInputField();
-      }
-    });
+  for (let i = 1; i <= arr.length; i++) {
+    let temporaryStore = JSON.parse(localStorage.getItem(`task ${i}`));
+    if (temporaryStore.task === inputField.value) {
+      let textNode = document.createTextNode(temporaryStore.task);
+      tempMsg.classList.add("hide");
+      li.appendChild(textNode);
+      div.classList.add("item-style");
+      div.appendChild(li);
+      div2.append(editIcon);
+      div2.append(delIcon);
+      div.append(div2);
+      div2.classList.add("list-edit-del");
+      editIcon.classList.add("fa", "fa-pencil-square", "edit-icon");
+      delIcon.classList.add("fa", "fa-trash", "del-icon");
+      ul.appendChild(div);
+      clearInputField();
+
+      // task delete button
+      delIcon.addEventListener("click", () => {
+        localStorage.removeItem(`task ${i}`);
+        location.reload();
+      });
+
+      // task edit button
+      editIcon.addEventListener("click", () => {
+        console.log("hello world2");
+      });
+
+      // check task as done
+      li.addEventListener("click", () => {
+        defaultTaskState = true;
+        let valueDictionary2 = {
+          state: defaultTaskState,
+          task: temporaryStore.task,
+        };
+        localStorage.setItem(`task ${i}`, JSON.stringify(valueDictionary2));
+        let temporaryStore2 = JSON.parse(localStorage.getItem(`task ${i}`));
+        if (temporaryStore2.state === true) {
+          li.classList.add("done");
+        }
+      });
+    }
   }
-
-  // task edit button
-  let editBtn = document.querySelector(".edit-icon");
-  editBtn.addEventListener("click", () => {
-    console.log("edit button clicked");
-  });
-
-  // Task delete button
-  let delBtn = document.querySelector(".del-icon");
-  delBtn.addEventListener("click", () => {
-    // console.log("delete task button clicked");
-    let tempStore = JSON.parse(localStorage.getItem("keyValue"));
-    // use foreach loop to iterate through the tempStore array
-    tempStore.forEach((element) => {
-      console.log(element);
-    });
-  });
 };
 
 // clear input field
@@ -114,11 +142,3 @@ let clearInputField = () => {
 const addBtn = document.querySelector(".btn").addEventListener("click", () => {
   captureInputValues();
 });
-
-// Clear all content from the local storage database
-let clearBtn = document
-  .querySelector(".btn-clear")
-  .addEventListener("click", () => {
-    localStorage.removeItem("keyValue");
-    window.location.reload();
-  });
